@@ -41,6 +41,11 @@ ram.runtime = "50M"
     ask.fr = "Choisissez l'administrateur de l'appli."
     type = "user"
 
+    [install.mainpassword]
+    ask.en = "Enter user's password."
+    ask.fr = "Saisissez le mot de passe de l'utilisateur."
+    type = "password"
+
     [install.init_main_permission]
     help.en = "If enabled, Metabase will be accessible by people who do not have an account. This can be changed later via the webadmin."
     help.fr = "Si cette case est cochée, Metabase sera accessible aux personnes n’ayant pas de compte. Vous pourrez changer ceci plus tard via la webadmin."
