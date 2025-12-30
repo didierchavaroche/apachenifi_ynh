@@ -135,7 +135,6 @@
         <property name="Manager DN">uid=__MAINADMIN__,ou=users,dc=yunohost,dc=org</property>
         <property name="Manager Password">__MAINPASSWORD__</property>
 
-        <!--  
         <property name="TLS - Keystore"></property>
         <property name="TLS - Keystore Password"></property>
         <property name="TLS - Keystore Type"></property>
@@ -145,7 +144,6 @@
         <property name="TLS - Client Auth"></property>
         <property name="TLS - Protocol"></property>
         <property name="TLS - Shutdown Gracefully"></property>
-        -->
 
         <property name="Referral Strategy">FOLLOW</property>
         <property name="Connect Timeout">10 secs</property>
@@ -165,8 +163,8 @@
         <property name="User Group Name Attribute"></property>
         <property name="User Group Name Attribute - Referenced Group Attribute"></property>
         <property name="Group Search Base"></property>
-        <property name="Group Object Class">group</property>
-        <property name="Group Search Scope">ONE_LEVEL</property>
+        <property name="Group Object Class"></property>
+        <property name="Group Search Scope"></property>
         <property name="Group Search Filter"></property>
         <property name="Group Name Attribute"></property>
         <property name="Group Member Attribute"></property>
