@@ -1,5 +1,5 @@
 [Unit]
-Description=Metabase: Web database management tool
+Description=Apache NiFi: Web data flow management tool
 After=syslog.target
 After=network.target
 
