@@ -16,7 +16,6 @@ if [ ! -d "$java_home" ]; then
   ynh_setup_source --dest_dir="$java_home" --source_id="java21"
 fi
 
-ynh_replace_regex --match="#export JAVA_HOME.*" --replace="export JAVA_HOME=$java_home" --file="$install_dir/bin/nifi-env.sh"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -26,12 +25,13 @@ ynh_script_progression "Setting up source files..."
 ynh_setup_source --dest_dir="$install_dir" --source_id="main"
 
 chmod +x $install_dir/bin/nifi.sh
+chmod +x $install_dir/bin/nifi-env.sh
 
 #=================================================
 # SETUP ENVIRONNEMENT
 #=================================================
 
-_install_nifi_env
+ynh_replace_regex --match="#export JAVA_HOME.*" --replace="export JAVA_HOME=$java_home" --file="$install_dir/bin/nifi-env.sh"
 
 #=================================================
 # NGINX CONFIGURATION
