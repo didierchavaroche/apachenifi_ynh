@@ -134,7 +134,7 @@
 
         <property name="Manager DN">uid=__MAINADMIN__,ou=users,dc=yunohost,dc=org</property>
         <property name="Manager Password">__MAINPASSWORD__</property>
-
+    <!--
         <property name="TLS - Keystore"></property>
         <property name="TLS - Keystore Password"></property>
         <property name="TLS - Keystore Type"></property>
@@ -144,7 +144,7 @@
         <property name="TLS - Client Auth"></property>
         <property name="TLS - Protocol"></property>
         <property name="TLS - Shutdown Gracefully"></property>
-
+    -->
         <property name="Referral Strategy">FOLLOW</property>
         <property name="Connect Timeout">10 secs</property>
         <property name="Read Timeout">10 secs</property>
