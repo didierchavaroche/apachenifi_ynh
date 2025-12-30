@@ -10,6 +10,7 @@ Group=__APP__
 WorkingDirectory=__INSTALL_DIR__
 ExecStart=__INSTALL_DIR__/bin/nifi.sh start
 ExecStop=__INSTALL_DIR__/bin/nifi.sh stop
+EnvironmentFile=__INSTALL_DIR__/.env
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=__APP__

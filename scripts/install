@@ -26,6 +26,12 @@ ynh_setup_source --dest_dir="$install_dir" --source_id="main"
 chmod +x $install_dir/bin/nifi.sh
 
 #=================================================
+# SETUP ENVIRONNEMENT
+#=================================================
+
+_install_nifi_env
+
+#=================================================
 # NGINX CONFIGURATION
 #=================================================
 ynh_script_progression "Configuring NGINX web server..."
