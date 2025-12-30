@@ -52,6 +52,10 @@ ram.runtime = "50M"
         url = "https://dlcdn.apache.org/nifi/2.7.2/nifi-2.7.2-bin.zip"
         sha256 = "64f8a081c6b37f6ea2795500cb99596b5ebe7db461f96655e5b253ed695366e6"
         
+        [resources.sources.java21]
+        url = "https://download.java.net/java/GA/jdk21.0.2/f2283984656d49d69e91c558476027ac/13/GPL/openjdk-21.0.2_linux-x64_bin.tar.gz"
+        sha256 = "a2def047a73941e01a73739f92755f86b895811afb1f91243db214cff5bdac3f"
+
         # Disabled. Metabase releases its Community Edition as v0.x and Entreprise Edition as v1.x. What the heck.
         # autoupdate.strategy = "latest_github_release"
 

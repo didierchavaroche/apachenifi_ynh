@@ -11,10 +11,12 @@ mainpassword=$(ynh_user_get_info --username=$mainadmin --key=passsword)
 #=================================================
 ynh_script_progression "checking up source if needed..."
 
-if ! dpkg -l | grep -q '^ii  openjdk-21-jdk'; then
-  ynh_exec_and_print_stderr_only_if_error wget -N -O /tmp/jdk-21_linux-x64_bin.deb https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.deb
-  ynh_exec_and_print_stderr_only_if_error dpkg -i /tmp/jdk-21_linux-x64_bin.deb
+if [ ! -d "$java_home" ]; then
+  mkdir $java_home
+  ynh_setup_source --dest_dir="$java_home" --source_id="java21"
 fi
+
+ynh_replace_regex --match="#export JAVA_HOME.*" --replace="export JAVA_HOME=$java_home" --file="$install_dir/bin/nifi-env.sh"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
