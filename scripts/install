@@ -43,8 +43,8 @@ yunohost service add $app --description="Data processing tool" --log="/var/log/$
 #=================================================
 ynh_script_progression "Adding $app's configuration..."
 
-ynh_config_add --template="nifi.properties" --destination="$install_dir/conf"
-ynh_config_add --template="login-identity-providers.xml" --destination="$install_dir/conf"
+ynh_config_add --template="nifi.properties" --destination="$install_dir/conf/nifi.properties"
+ynh_config_add --template="login-identity-providers.xml" --destination="$install_dir/conf/login-identity-providers.xml"
 
 #=================================================
 # START SYSTEMD SERVICE
