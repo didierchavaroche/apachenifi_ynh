@@ -23,7 +23,7 @@ Apache NiFi est un outil puissant pour le traitement et le flux de données. Il 
 
 ## Captures d’écran
 
-![Capture d’écran de Apache NiFi](./doc/screenshots/nifi-product-screenshot.png)
+![Capture d’écran de Apache NiFi](./doc/screenshots/apachenifi-product-screenshot.png)
 
 ## Documentations et ressources
 

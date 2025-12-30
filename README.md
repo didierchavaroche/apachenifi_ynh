@@ -23,7 +23,7 @@ Apache NiFi is an easy-to-use, powerful, and reliable system to process and dist
 
 ## Screenshots
 
-![Screenshot of Apache NiFi](./doc/screenshots/nifi-product-screenshot.png)
+![Screenshot of Apache NiFi](./doc/screenshots/apachenifi-product-screenshot.png)
 
 ## Documentation and resources
 

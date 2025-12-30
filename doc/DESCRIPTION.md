@@ -1,1 +1,1 @@
-Metabase is the easy, open-source way for everyone in your company to ask questions and learn from data.
+Apache NiFi is a powerful, easy-to-use system to automate the flow of data between systems. It supports highly scalable directed graphs of data routing, transformation, and system mediation logic.
