@@ -1,0 +1,74 @@
+packaging_format = 2
+
+id = "apachenifi"
+name = "Apache NiFi"
+description.en = "An easy to use, powerful, and reliable system to process and distribute data"
+description.fr = "Un système facile à utiliser, puissant et fiable pour traiter et distribuer des données"
+
+version = "2.7.2~ynh2"
+
+maintainers = ["Didier Chavaroche"]
+
+[upstream]
+license = "AGPL-3.0-only"
+website = "https://nifi.apache.org/"
+admindoc = "https://nifi.apache.org/components/"
+code = "https://github.com/apache/nifi"
+
+[integration]
+yunohost = ">= 12.0.9"
+helpers_version = "2.1"
+architectures = "all"
+multi_instance = false
+
+ldap = true
+sso = true
+
+disk = "50M"
+ram.build = "50M"
+ram.runtime = "50M"
+
+[install]
+    [install.domain]
+    type = "domain"
+
+    [install.path]
+    type = "path"
+    default = "/nifi"
+
+    [install.mainadmin]
+    ask.en = "Choose the app's administrator."
+    ask.fr = "Choisissez l'administrateur de l'appli."
+    type = "user"
+
+    [install.init_main_permission]
+    help.en = "If enabled, Metabase will be accessible by people who do not have an account. This can be changed later via the webadmin."
+    help.fr = "Si cette case est cochée, Metabase sera accessible aux personnes n’ayant pas de compte. Vous pourrez changer ceci plus tard via la webadmin."
+    type = "group"
+    default = "admins"
+
+[resources]
+        [resources.sources.main]
+        url = "https://dlcdn.apache.org/nifi/2.7.2/nifi-2.7.2-bin.zip"
+        sha256 = "64f8a081c6b37f6ea2795500cb99596b5ebe7db461f96655e5b253ed695366e6"
+        
+        # Disabled. Metabase releases its Community Edition as v0.x and Entreprise Edition as v1.x. What the heck.
+        # autoupdate.strategy = "latest_github_release"
+
+    [resources.ports]
+
+    [resources.system_user]
+
+    [resources.install_dir]
+
+    [resources.permissions]
+    main.url = "/"
+
+    [resources.apt]
+    packages = [
+        "postgresql",
+        "apt-transport-https"
+    ]
+    
+    [resources.database]
+    type = "postgresql"

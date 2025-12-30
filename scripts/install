@@ -1,0 +1,60 @@
+#!/bin/bash
+
+source _common.sh
+source /usr/share/yunohost/helpers
+
+mainuser=$mainadmin
+mainpassword=$(ynh_user_get_info --username=$mainadmin --key=passsword)
+
+#=================================================
+# INSTALL JAVA SE 21 if chosen 
+#=================================================
+ynh_script_progression "checking up source if needed..."
+
+if [[ $javaversion == "JavaSE-21" ]]; then
+  ynh_exec_and_print_stderr_only_if_error wget -N -O /tmp/jdk-21_linux-x64_bin.deb https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.deb
+  ynh_exec_and_print_stderr_only_if_error dpkg -i /tmp/jdk-21_linux-x64_bin.deb
+fi
+
+#=================================================
+# DOWNLOAD, CHECK AND UNPACK SOURCE
+#=================================================
+ynh_script_progression "Setting up source files..."
+
+ynh_setup_source --dest_dir="$install_dir" --source_id="main"
+
+chmod +x $install_dir/bin/nifi.sh
+
+#=================================================
+# NGINX CONFIGURATION
+#=================================================
+ynh_script_progression "Configuring NGINX web server..."
+
+ynh_config_add_nginx
+
+ynh_config_add_systemd
+
+ynh_config_add_logrotate
+
+yunohost service add $app --description="Data processing tool" --log="/var/log/$app/$app.log"
+
+#=================================================
+# SETUP CONFIG
+#=================================================
+ynh_script_progression "Adding $app's configuration..."
+
+ynh_config_add --template="nifi.properties" --destination="$install_dir/conf"
+ynh_config_add --template="login-identity-providers.xml" --destination="$install_dir/conf"
+
+#=================================================
+# START SYSTEMD SERVICE
+#=================================================
+ynh_script_progression "Starting $app's systemd service..."
+
+ynh_systemctl --service=$app --action=start --log_path=systemd --wait_until="Please use the following URL to setup your Metabase installation:"
+
+#=================================================
+# END OF SCRIPT
+#=================================================
+
+ynh_script_progression "Installation of $app completed"

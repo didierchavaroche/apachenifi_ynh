@@ -1,0 +1,35 @@
+#!/bin/bash
+
+source _common.sh
+source /usr/share/yunohost/helpers
+
+#=================================================
+# REMOVE SERVICE FROM ADMIN PANEL
+#=================================================
+
+if ynh_hide_warnings yunohost service status $app >/dev/null; then
+	yunohost service remove $app
+fi
+
+ynh_config_remove_systemd
+
+ynh_safe_rm "/etc/default/$app"
+
+ynh_config_remove_nginx
+
+ynh_config_remove_logrotate
+
+#=================================================
+# INSTALL JAVA SE 21 if chosen 
+#=================================================
+ynh_script_progression "Removal source if needed..."
+if [[ $javaversion == "JavaSE-21" ]]
+    ynh_exec_and_print_stderr_only_if_error apt purge openjdk-21-jdk
+    ynh_exec_and_print_stderr_only_if_error dpkg -r jdk-21
+fi
+
+#=================================================
+# END OF SCRIPT
+#=================================================
+
+ynh_script_progression "Removal of $app completed"
