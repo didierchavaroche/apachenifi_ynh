@@ -262,7 +262,7 @@
 
         - Access Policy Provider - The identifier for an Access Policy Provider defined above.
     -->
-    <accessPolicyProvider>
+    <!-- <accessPolicyProvider>
         <identifier>file-access-policy-provider</identifier>
         <class>org.apache.nifi.authorization.FileAccessPolicyProvider</class>
         <property name="User Group Provider">ldap-provider</property>
@@ -276,7 +276,7 @@
         <identifier>managed-authorizer</identifier>
         <class>org.apache.nifi.authorization.StandardManagedAuthorizer</class>
         <property name="Access Policy Provider">file-access-policy-provider</property>
-    </authorizer>
+    </authorizer> -->
 
     <!--
         Single User Authorizer requires the configuration of the SingleUserLoginIdentityProvider
@@ -284,8 +284,8 @@
 
         The managed-authorizer should be used for production deployments
     -->
-    <!-- <authorizer>
+    <authorizer>
         <identifier>single-user-authorizer</identifier>
         <class>org.apache.nifi.authorization.single.user.SingleUserAuthorizer</class>
-    </authorizer> -->
+    </authorizer>
 </authorizers>

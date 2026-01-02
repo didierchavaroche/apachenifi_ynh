@@ -29,12 +29,12 @@
 
         The 'Username' will be a random UUID and the 'Password' will be stored using bcrypt hashing
     -->
-    <!-- <provider>
+    <provider>
         <identifier>single-user-provider</identifier>
         <class>org.apache.nifi.authentication.single.user.SingleUserLoginIdentityProvider</class>
         <property name="Username"/>
         <property name="Password"/>
-    </provider> -->
+    </provider>
     <!--
         Identity Provider for users logging in with username/password against an LDAP server.
         
@@ -79,7 +79,7 @@
             for. If the user never logs out, they will be required to log back in following
             this duration.
     -->
-    <provider>
+    <!-- <provider>
         <identifier>ldap-provider</identifier>
         <class>org.apache.nifi.ldap.LdapProvider</class>
         <property name="Authentication Strategy">SIMPLE</property>
@@ -87,7 +87,7 @@
         <property name="Manager DN">uid=__MAINADMIN__,ou=users,dc=yunohost,dc=org</property>
         <property name="Manager Password">__MAINPASSWORD__</property>
         
-        <!-- <property name="TLS - Keystore"></property>
+        <property name="TLS - Keystore"></property>
         <property name="TLS - Keystore Password"></property>
         <property name="TLS - Keystore Type"></property>
         <property name="TLS - Truststore"></property>
@@ -95,7 +95,7 @@
         <property name="TLS - Truststore Type"></property>
         <property name="TLS - Client Auth"></property>
         <property name="TLS - Protocol"></property>
-        <property name="TLS - Shutdown Gracefully"></property> -->
+        <property name="TLS - Shutdown Gracefully"></property>
         
         <property name="Referral Strategy">FOLLOW</property>
         <property name="Connect Timeout">10 secs</property>
@@ -107,7 +107,7 @@
 
         <property name="Identity Strategy">USE_DN</property>
         <property name="Authentication Expiration">12 hours</property>
-    </provider>
+    </provider> -->
     <!-- NOTE: The Kerberos Provider is deprecated for removal in subsequent releases -->
     <!--
         Identity Provider for users logging in with username/password against a Kerberos KDC server.
