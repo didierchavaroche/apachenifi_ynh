@@ -57,7 +57,7 @@ ynh_config_add --template="authorizers.xml" --destination="$install_dir/conf/aut
 #=================================================
 #ynh_script_progression "Starting $app's systemd service..."
 
-ynh_exec_as_app $install_dir/bin/nifi-app.sh set-single-user-credentials $mainadmin $mainpassword
+ynh_exec_as_app $install_dir/bin/nifi.sh set-single-user-credentials $mainadmin $mainpassword
 
 ynh_systemctl --service=$app --action=start --log_path=systemd
 
