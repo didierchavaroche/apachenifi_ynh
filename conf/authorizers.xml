@@ -284,8 +284,8 @@
 
         The managed-authorizer should be used for production deployments
     -->
-    <authorizer>
+    <!-- <authorizer>
         <identifier>single-user-authorizer</identifier>
         <class>org.apache.nifi.authorization.single.user.SingleUserAuthorizer</class>
-    </authorizer>
+    </authorizer> -->
 </authorizers>
