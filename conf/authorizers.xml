@@ -127,7 +127,7 @@
         NOTE: Any identity mapping rules specified in nifi.properties will also be applied to the user identities.
             Group names are not mapped.
     -->
-    <userGroupProvider>
+    <!-- <userGroupProvider>
         <identifier>ldap-user-group-provider</identifier>
         <class>org.apache.nifi.ldap.tenants.LdapUserGroupProvider</class>
         <property name="Authentication Strategy">SIMPLE</property>
@@ -135,7 +135,7 @@
         <property name="Manager DN">uid=__MAINADMIN__,ou=users,dc=yunohost,dc=org</property>
         <property name="Manager Password">__MAINPASSWORD__</property>
     
-        <!-- <property name="TLS - Keystore"></property>
+        <property name="TLS - Keystore"></property>
         <property name="TLS - Keystore Password"></property>
         <property name="TLS - Keystore Type"></property>
         <property name="TLS - Truststore"></property>
@@ -143,7 +143,7 @@
         <property name="TLS - Truststore Type"></property>
         <property name="TLS - Client Auth"></property>
         <property name="TLS - Protocol"></property>
-        <property name="TLS - Shutdown Gracefully"></property> -->
+        <property name="TLS - Shutdown Gracefully"></property>
     
         <property name="Referral Strategy">FOLLOW</property>
         <property name="Connect Timeout">10 secs</property>
@@ -169,7 +169,7 @@
         <property name="Group Name Attribute"></property>
         <property name="Group Member Attribute"></property>
         <property name="Group Member Attribute - Referenced User Attribute"></property>
-    </userGroupProvider>
+    </userGroupProvider> -->
 
 
     <!--
@@ -262,12 +262,12 @@
 
         - Access Policy Provider - The identifier for an Access Policy Provider defined above.
     -->
-    <!-- <accessPolicyProvider>
+    <accessPolicyProvider>
         <identifier>file-access-policy-provider</identifier>
         <class>org.apache.nifi.authorization.FileAccessPolicyProvider</class>
-        <property name="User Group Provider">file-user-group-provider</property>
+        <property name="User Group Provider">ldap-provider</property>
         <property name="Authorizations File">./conf/authorizations.xml</property>
-        <property name="Initial Admin Identity"></property>
+        <property name="Initial Admin Identity">uid=__MAINADMIN__,ou=users,dc=yunohost,dc=org</property>
         <property name="Initial Admin Group"></property>
         <property name="Node Identity 1"></property>
         <property name="Node Group"></property>
@@ -276,7 +276,7 @@
         <identifier>managed-authorizer</identifier>
         <class>org.apache.nifi.authorization.StandardManagedAuthorizer</class>
         <property name="Access Policy Provider">file-access-policy-provider</property>
-    </authorizer> -->
+    </authorizer>
 
     <!--
         Single User Authorizer requires the configuration of the SingleUserLoginIdentityProvider
