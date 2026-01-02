@@ -47,13 +47,13 @@
             NOTE: Any identity mapping rules specified in nifi.properties will also be applied to the group identities,
             so the values should be the unmapped identities (i.e. full DN from a certificate).
     -->
-    <userGroupProvider>
+    <!-- <userGroupProvider>
         <identifier>file-user-group-provider</identifier>
         <class>org.apache.nifi.authorization.FileUserGroupProvider</class>
         <property name="Users File">./conf/users.xml</property>
         <property name="Initial User Identity 1"></property>
         <property name="Initial Group Identity 1"></property>
-    </userGroupProvider>
+    </userGroupProvider> -->
 
     <!--
         The LdapUserGroupProvider will retrieve users and groups from an LDAP server. The users and groups
@@ -134,7 +134,7 @@
 
         <property name="Manager DN">uid=__MAINADMIN__,ou=users,dc=yunohost,dc=org</property>
         <property name="Manager Password">__MAINPASSWORD__</property>
-    <!--
+    
         <property name="TLS - Keystore"></property>
         <property name="TLS - Keystore Password"></property>
         <property name="TLS - Keystore Type"></property>
@@ -144,7 +144,7 @@
         <property name="TLS - Client Auth"></property>
         <property name="TLS - Protocol"></property>
         <property name="TLS - Shutdown Gracefully"></property>
-    -->
+    
         <property name="Referral Strategy">FOLLOW</property>
         <property name="Connect Timeout">10 secs</property>
         <property name="Read Timeout">10 secs</property>
@@ -254,8 +254,15 @@
             added/removed from the cluster.
 
             NOTE: The group must exist before starting NiFi.
+
+        The StandardManagedAuthorizer. This authorizer implementation must be configured with the
+        Access Policy Provider which it will use to access and manage users, groups, and policies.
+        These users, groups, and policies will be used to make all access decisions during authorization
+        requests.
+
+        - Access Policy Provider - The identifier for an Access Policy Provider defined above.
     -->
-    <accessPolicyProvider>
+    <!-- <accessPolicyProvider>
         <identifier>file-access-policy-provider</identifier>
         <class>org.apache.nifi.authorization.FileAccessPolicyProvider</class>
         <property name="User Group Provider">file-user-group-provider</property>
@@ -265,20 +272,11 @@
         <property name="Node Identity 1"></property>
         <property name="Node Group"></property>
     </accessPolicyProvider>
-
-    <!--
-        The StandardManagedAuthorizer. This authorizer implementation must be configured with the
-        Access Policy Provider which it will use to access and manage users, groups, and policies.
-        These users, groups, and policies will be used to make all access decisions during authorization
-        requests.
-
-        - Access Policy Provider - The identifier for an Access Policy Provider defined above.
-    -->
     <authorizer>
         <identifier>managed-authorizer</identifier>
         <class>org.apache.nifi.authorization.StandardManagedAuthorizer</class>
         <property name="Access Policy Provider">file-access-policy-provider</property>
-    </authorizer>
+    </authorizer> -->
 
     <!--
         Single User Authorizer requires the configuration of the SingleUserLoginIdentityProvider

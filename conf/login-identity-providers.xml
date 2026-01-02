@@ -19,11 +19,6 @@
     must be specified in the nifi.properties file.
 -->
 <loginIdentityProviders>
-    <provider>
-        <identifier>file-provider</identifier>
-        <class>org.apache.nifi.login.StandardFileIdentityProvider</class>
-        <property name="Authentication Expiration">12 hours</property>
-    </provider>
     <!--
         Single User Login Identity Provider supporting automated generation of Username and Password
 
