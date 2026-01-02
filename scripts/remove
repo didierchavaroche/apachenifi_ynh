@@ -13,8 +13,6 @@ fi
 
 ynh_config_remove_systemd
 
-ynh_safe_rm "/etc/default/$app"
-
 ynh_config_remove_nginx
 
 ynh_config_remove_logrotate
