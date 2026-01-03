@@ -1,14 +1,10 @@
 verion=1.0
 
 [main]
-name.en = "Main configuration"
-name.fr = "Configuration principale"
-services = ["__APP__"]
+name.en = "Renew KeyStore Certificate"
+name.fr = "Renouveller le certificat du porte-clé"
 
     [main.configuration]
-    name.en = "Renew KeyStore Certificate"
-    name.fr = "Renouveller le certificat du porte-clé"
-
         [main.configuration.install_keystore]
         ask.en = "Renew"
         ask.fr = "Renouveller"

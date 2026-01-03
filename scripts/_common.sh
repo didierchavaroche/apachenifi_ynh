@@ -8,7 +8,11 @@ __install_keystore() {
         rm $install_dir/conf/keystore.jks
     fi
 
-    keytool -genkeypair -alias nifi -keyalg RSA -keystore $install_dir/conf/keystore.jks -storepass $keystorepasswd -keypass $keystorepasswd -validity 365 -keysize 2048 -dname "CN=$domain,OU=users"
+   # Convertit le certificat Let's Encrypt en format PKCS12
+    openssl pkcs12 -export -in /etc/yunohost/certs/$domain/cert.pem -inkey /etc/yunohost/certs/$domain/key.pem -out $install_dir/conf/nifi-keystore.p12 -name nifi -passout pass:$keystorepasswd
+
+    # Convertit le fichier PKCS12 en keystore JKS
+    keytool -importkeystore -srckeystore $install_dir/conf/nifi-keystore.p12 -srcstoretype PKCS12 -destkeystore $install_dir/conf/keystore.jks -deststoretype JKS -srcstorepass $keystorepasswd -deststorepass $keystorepasswd
 }
 
 #=================================================
