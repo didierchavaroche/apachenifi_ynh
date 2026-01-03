@@ -1,18 +1,32 @@
 #!/bin/bash
 
 #=================================================
-# INSTALL KEYSTORE
+# INSTALL KEYSTORE AND TRUST STORE
+# Form wlkthrougt : https://nifi.apache.org/docs/nifi-docs/html/walkthroughs.html#securing-nifi-with-provided-certificates
 #=================================================
 __install_keystore() {
-    if [ -f "$install_dir/conf/keystore.jks" ]; then
-        rm $install_dir/conf/keystore.jks
+    if [ -f "$1/conf/keystore.jks" ]; then
+        rm $1/conf/keystore.jks
     fi
 
-   # Convertit le certificat Let's Encrypt en format PKCS12
-    openssl pkcs12 -export -in /etc/yunohost/certs/$domain/crt.pem -inkey /etc/yunohost/certs/$domain/key.pem -out $install_dir/conf/nifi-keystore.p12 -name nifi -passout pass:$keystorepasswd
+    if [ -f "$1/conf/truststore.jks" ]; then
+        rm $1/conf/truststore.jks
+    fi
 
-    # Convertit le fichier PKCS12 en keystore JKS
-    keytool -importkeystore -srckeystore $install_dir/conf/nifi-keystore.p12 -srcstoretype PKCS12 -destkeystore $install_dir/conf/keystore.jks -deststoretype JKS -srcstorepass $keystorepasswd -deststorepass $keystorepasswd
+    # Extraire le certificat racine (le dernier certificat dans la chaîne)
+    ynh_exec_as_app awk '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/' /etc/yunohost/certs/$domain/crt.pem | awk 'NR>1,/-----END CERTIFICATE-----/' | sed -n '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/p' > $install_dir/nifi-cacert.pem
+
+    # Form the PKCS12 keystore from the certificate chain and private key.
+    ynh_exec_as_app openssl pkcs12 -export -out $install_dir/nifi.p12 -inkey /etc/yunohost/certs/$domain/key.pem -in /etc/yunohost/certs/$domain/crt.pem -name nifi-key -passout pass:$keystorepasswd
+
+    # Convert the PKCS12 keystore for the NiFi instance into the Java KeyStore file (keystore.jks).
+    ynh_exec_as_app keytool -storepasswd -new $keystorepasswd -importkeystore -srckeystore $install/nifi.p12 -srcstoretype pkcs12 -srcalias nifi-key -destkeystore $install_dir/conf/keystore.jks -deststoretype jks -destalias nifi-key
+
+    # Convert the CA certificate into the NiFi truststore (truststore.jks) to allow trusted incoming connections.
+    ynh_exec_as_app keytool -storepasswd -new $keystorepasswd -importcert -alias nifi-cert -file $install_dir/nifi-cacert.pem -keystore $install_dir/conf/truststore.jks
+
+    # remove temporary certificate
+    ynh_safe_rm $install_dir/nifi-cacert.pem
 }
 
 #=================================================

@@ -5,18 +5,8 @@
 #=================================================
 run__install_keystore() {
     install_dir=$(ynh_app_setting_get --key=install_dir)
-    
-    # Vérifie si le fichier keystore.jks existe dans le répertoire de configuration
-    if [ -f "$install_dir/conf/keystore.jks" ]; then
-        # Si le fichier existe, le supprime
-        rm $install_dir/conf/keystore.jks
-    fi
 
-    # Convertit le certificat Let's Encrypt en format PKCS12
-    openssl pkcs12 -export -in /etc/yunohost/certs/$domain/cert.pem -inkey /etc/yunohost/certs/$domain/key.pem -out $install_dir/conf/nifi-keystore.p12 -name nifi -passout pass:$keystorepasswd
-
-    # Convertit le fichier PKCS12 en keystore JKS
-    keytool -importkeystore -srckeystore $install_dir/conf/nifi-keystore.p12 -srcstoretype PKCS12 -destkeystore $install_dir/conf/keystore.jks -deststoretype JKS -srcstorepass $keystorepasswd -deststorepass $keystorepasswd
+    __install_keystore $install_dir    
 }
 
 #=================================================
