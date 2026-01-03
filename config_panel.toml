@@ -1,13 +1,8 @@
 verion=1.0
 
 [main]
-## Define the label for your panel
-## Internationalization works similarly to the 'description' and 'ask' questions in the manifest
 name.en = "Main configuration"
 name.fr = "Configuration principale"
-
-## (optional) If you need to trigger a service reload-or-restart after the user
-## change a question in this panel, you can add your service in the list.
 services = ["__APP__"]
 
     [main.configuration]
