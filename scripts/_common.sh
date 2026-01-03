@@ -9,7 +9,7 @@ __install_keystore() {
     fi
 
    # Convertit le certificat Let's Encrypt en format PKCS12
-    openssl pkcs12 -export -in /etc/yunohost/certs/$domain/cert.pem -inkey /etc/yunohost/certs/$domain/key.pem -out $install_dir/conf/nifi-keystore.p12 -name nifi -passout pass:$keystorepasswd
+    openssl pkcs12 -export -in /etc/yunohost/certs/$domain/crt.pem -inkey /etc/yunohost/certs/$domain/key.pem -out $install_dir/conf/nifi-keystore.p12 -name nifi -passout pass:$keystorepasswd
 
     # Convertit le fichier PKCS12 en keystore JKS
     keytool -importkeystore -srckeystore $install_dir/conf/nifi-keystore.p12 -srcstoretype PKCS12 -destkeystore $install_dir/conf/keystore.jks -deststoretype JKS -srcstorepass $keystorepasswd -deststorepass $keystorepasswd
