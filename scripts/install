@@ -30,7 +30,7 @@ chmod +x $install_dir/bin/nifi-env.sh
 
 ynh_replace_regex --match="#export JAVA_HOME.*" --replace="export JAVA_HOME=$java_home" --file="$install_dir/bin/nifi-env.sh"
 
-__install_keystore
+__install_keystore $install_dir
 
 #=================================================
 # NGINX CONFIGURATION
