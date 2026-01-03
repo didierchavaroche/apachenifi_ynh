@@ -1,7 +1,6 @@
 verion=1.0
 
 [main]
-
 ## Define the label for your panel
 ## Internationalization works similarly to the 'description' and 'ask' questions in the manifest
 name.en = "Main configuration"
