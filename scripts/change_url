@@ -20,14 +20,20 @@ ynh_config_change_url_nginx
 #=================================================
 # CHANGING METABASE CONFIG FILE
 #=================================================
-ynh_delete_file_checksum --file="install_dir/conf/nifi.properties"
-ynh_config_add --template="nifi.properties" --destination="$install_dir/conf/nifi.properties"
+ynh_delete_file_checksum --file="$install_dir/conf/nifi.properties"
+ynh_replace --match="$old_domain" --replace="$new_domain" --file="$install_dir/conf/nifi.properties"
+ynh_replace --match="$old_path" --replace="$new_path" --file="$install_dir/conf/nifi.properties"
+ynh_store_file_checksum $install_dir/conf/nifi.properties
 
 ynh_delete_file_checksum --file="$install_dir/conf/login-identity-providers.xml"
-ynh_config_add --template="login-identity-providers.xml" --destination="$install_dir/conf/login-identity-providers.xml"
+ynh_replace --match="$old_domain" --replace="$new_domain" --file="$install_dir/conf/login-identity-providers.xml"
+ynh_replace --match="$old_path" --replace="$new_path" --file="$install_dir/conf/login-identity-providers.xml"
+ynh_store_file_checksum $install_dir/conf/login-identity-providers.xml
 
 ynh_delete_file_checksum --file="$install_dir/conf/authorizers.xml"
-ynh_config_add --template="authorizers.xml" --destination="$install_dir/conf/authorizers.xml"
+ynh_replace --match="$old_domain" --replace="$new_domain" --file="$install_dir/conf/authorizers.xml"
+ynh_replace --match="$old_path" --replace="$new_path" --file="$install_dir/conf/authorizers.xml"
+ynh_store_file_checksum $install_dir/conf/authorizers.xml
 
 #=================================================
 # START SYSTEMD SERVICE
