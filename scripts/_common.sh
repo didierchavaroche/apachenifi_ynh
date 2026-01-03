@@ -23,7 +23,7 @@ __install_keystore() {
     keytool -importkeystore -srckeystore $install_dir/nifi.p12 -srcstoretype pkcs12 -srcalias nifi-key -destkeystore $install_dir/conf/keystore.jks -deststoretype jks -destalias nifi-key -srcstorepass $keystorepasswd -deststorepass $keystorepasswd
 
     # Convert the CA certificate into the NiFi truststore (truststore.jks) to allow trusted incoming connections.
-    keytool -importcert -alias nifi-cert -file $install_dir/nifi-cacert.pem -keystore $install_dir/conf/truststore.jks -deststorepass $keystorepasswd
+    keytool -importcert -alias nifi-cert -file $install_dir/nifi-cacert.pem -keystore $install_dir/conf/truststore.jks -deststorepass $keystorepasswd -noprompt
 
     # remove temporary certificate
     ynh_safe_rm $install_dir/nifi.p12

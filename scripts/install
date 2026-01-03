@@ -6,7 +6,7 @@ source _common.sh
 #=================================================
 # INSTALL JAVA SE 21 if chosen 
 #=================================================
-ynh_script_progression "Checking up source if needed..."
+ynh_script_progression "Downloading and installing Java SE 21..."
 
 if [ ! -d "$java_home" ]; then
   mkdir $java_home
