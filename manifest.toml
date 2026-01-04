@@ -34,7 +34,7 @@ ram.runtime = "50M"
 
     [install.path]
     type = "path"
-    default = "/apachenifi"
+    default = "/nifi"
 
     [install.mainadmin]
     ask.en = "Choose the app's administrator."
