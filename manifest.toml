@@ -34,7 +34,7 @@ ram.runtime = "50M"
 
     [install.path]
     type = "path"
-    default = "/apapchenifi"
+    default = "/apachenifi"
 
     [install.mainadmin]
     ask.en = "Choose the app's administrator."
