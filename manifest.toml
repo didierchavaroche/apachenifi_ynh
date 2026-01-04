@@ -32,6 +32,10 @@ ram.runtime = "50M"
     [install.domain]
     type = "domain"
 
+    [install.path]
+    type = "path"
+    default = "/apapchenifi"
+
     [install.mainadmin]
     ask.en = "Choose the app's administrator."
     ask.fr = "Choisissez l'administrateur de l'appli."
