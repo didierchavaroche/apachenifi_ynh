@@ -43,7 +43,7 @@ ynh_config_add_systemd
 
 ynh_config_add_logrotate
 
-yunohost service add $app --description="Data processing tool" --log="/var/log/$app/$app.log"
+yunohost service add $app --description="Data processing tool" --log="$install_dir/logs/nifi-app.log"
 
 #=================================================
 # SETUP CONFIG
