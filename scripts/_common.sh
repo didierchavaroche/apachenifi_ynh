@@ -13,14 +13,20 @@ __install_keystore() {
         rm $1/conf/truststore.jks
     fi
 
+    if [ -f /etc/yunohost/certs/$domain/fullchain.pem ];then
+        certfichier=/etc/yunohost/certs/$domain/fullchain.pem
+    else
+        certfichier=/etc/yunohost/certs/$domain/crt.pem
+    fi
+    
     JAVA_HOME=$java_home
     export JAVA_HOME
     
     # Extraire le certificat racine (le dernier certificat dans la chaîne)
-    awk '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/' /etc/yunohost/certs/$domain/crt.pem | awk 'NR>1,/-----END CERTIFICATE-----/' | sed -n '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/p' > $install_dir/nifi-cacert.pem
+    awk '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/' $certfichier | awk 'NR>1,/-----END CERTIFICATE-----/' | sed -n '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/p' > $install_dir/nifi-cacert.pem
 
     # Form the PKCS12 keystore from the certificate chain and private key.
-    openssl pkcs12 -export -out $install_dir/nifi.p12 -inkey /etc/yunohost/certs/$domain/key.pem -in /etc/yunohost/certs/$domain/crt.pem -name nifi-key -passout pass:$keystorepasswd
+    openssl pkcs12 -export -out $install_dir/nifi.p12 -inkey /etc/yunohost/certs/$domain/key.pem -in $certfichier -name nifi-key -passout pass:$keystorepasswd
 
     # Convert the PKCS12 keystore for the NiFi instance into the Java KeyStore file (keystore.jks).
     $JAVA_HOME/bin/keytool -importkeystore -srckeystore $install_dir/nifi.p12 -srcstoretype pkcs12 -srcalias nifi-key -destkeystore $install_dir/conf/keystore.jks -deststoretype jks -destalias nifi-key -srcstorepass $keystorepasswd -deststorepass $keystorepasswd
